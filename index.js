@@ -15,6 +15,11 @@ bot.on('ready', () => {
 bot.on("message", (message) => {
   if(message.author.bot) return;
 
+  //help
+  if(message.content.startsWith(config.prefix + "help")) {
+    message.channel.send("I'm happy to help, " + message.author.username + "!\n**Prefix:** `" + config.prefix + "`\n\n__Helpful Stuff__\n\n`" + config.prefix + "help` - Displays this message\n`" + config.prefix + "info` - Displays the bot info message\n`" + config.prefix + "natsuki` - Get an invite link for Natsuki Bot\n`" + config.prefix + "ping` - Pings Monika\n`" + config.prefix + "support` - Sends an invite link for the support guild")
+  }
+
   //ping - credit to kaoala7577 (DotBot repository), modified
   if(message.content.startsWith(config.prefix + "ping")) {
     message.channel.send("Here's your ping, " + message.author.username + "!").then(rsp => {
@@ -48,6 +53,18 @@ bot.on("message", (message) => {
     .setThumbnail(bot.user.displayAvatarURL)
     .setFooter("Welcome to the Literature Club!")
     .addField("Invite Link", "[Natsuki Bot](https://discordapp.com/api/oauth2/authorize?client_id=402160845515259924&permissions=8&scope=bot)")
+    .setTimestamp();
+    message.channel.send({embed});
+  }
+
+  //support
+  if(message.content.startsWith(config.prefix + "support")) {
+    let embed = new Discord.RichEmbed()
+    .setDescription("Sure, stop by any time, I'd love to spend more time with you!")
+    .setColor(0xd48975)
+    .setThumbnail(bot.user.displayAvatarURL)
+    .setFooter("Welcome to the Literature Club!")
+    .addField("Support Server", "[u g h . c o m](https://discord.gg/5qgHcxv)")
     .setTimestamp();
     message.channel.send({embed});
   }
